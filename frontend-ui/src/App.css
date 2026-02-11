@@ -36,6 +36,41 @@ body {
   font-size: 16px;
 }
 
+.app-nav {
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: center;
+  gap: 0;
+}
+
+.nav-btn {
+  padding: 16px 24px;
+  border: none;
+  background: white;
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 3px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-btn:hover {
+  background: #f8f9fa;
+  color: #4a90d9;
+}
+
+.nav-btn.active {
+  color: #4a90d9;
+  border-bottom-color: #4a90d9;
+  font-weight: 600;
+}
+
 .app-main {
   max-width: 1200px;
   margin: 0 auto;
@@ -81,6 +116,18 @@ body {
 
   .app-header h1 {
     font-size: 24px;
+  }
+
+  .app-nav {
+    flex-wrap: wrap;
+    justify-content: stretch;
+  }
+
+  .nav-btn {
+    flex: 1;
+    padding: 12px 16px;
+    font-size: 13px;
+    gap: 4px;
   }
 
   .app-main {
