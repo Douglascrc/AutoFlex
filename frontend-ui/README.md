@@ -1,46 +1,81 @@
-# Getting Started with Create React App
+# Frontend - Funcionalidades
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este documento resume as funcionalidades implementadas no frontend do sistema AutoFlex para atender aos requisitos.
 
-## Available Scripts
+### Componentes referentes a Produtos:
+- `ProductList.tsx` - Lista de produtos com ações
+- `ProductForm.tsx` - Formulário para criar/editar produtos
+- `productSlice.ts` - Redux store para produtos
+- `productService.ts` - Serviços de API para produtos
 
-In the project directory, you can run:
+---
 
-### `npm start`
+### Componentes referentes a Matérias-Primas:
+- `RawMaterialList.tsx` - Lista de matérias-primas com ações
+- `RawMaterialForm.tsx` - Formulário para criar/editar matérias-primas
+- `rawMaterialSlice.ts` - Redux store para matérias-primas
+- `rawMaterialService.ts` - Serviços de API para matérias-primas
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Associar Matérias-Primas aos Produtos
 
-### `npm test`
+### Componentes:
+- `RawMaterialAssociation.tsx` - Componente para gerenciar associações
+- Integrado ao `ProductForm.tsx` (não é tela separada conforme especificado)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Listar Produtos Que Podem Ser Produzidos
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Componentes:
+- `ProducibleProducts.tsx` - Lista produtos que podem ser produzidos
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🎨 Interface do Usuário
 
-### `npm run eject`
+### Navegação por Abas:
+- **📦 Produtos** - Gerenciamento de produtos
+- **🏭 Matérias-Primas** - Gerenciamento de matérias-primas
+- **🎯 Produtos Disponíveis** - Lista de produtos que podem ser produzidos
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Recursos da Interface:
+- ✅ Design responsivo
+- ✅ Modais para criar/editar
+- ✅ Confirmação de exclusão
+- ✅ Estados de loading
+- ✅ Tratamento de erros
+- ✅ Validação de formulários
+- ✅ Formatação de moeda (BRL)
+- ✅ Formatação de números
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 🔧 Tecnologias Utilizadas
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Frontend:
+- React 18 com TypeScript
+- Redux Toolkit para gerenciamento de estado
+- Axios para requisições HTTP
+- CSS
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🚀 Como Testar
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. **Iniciar Backend:**
+   ```bash
+   cd /home/douglascampos/Projects/autoflex
+   ./mvnw spring-boot:run
+   ```
+
+2. **Iniciar Frontend:**
+   ```bash
+   cd /home/douglascampos/Projects/autoflex/frontend-ui
+   npm start
+   ```
+
+3. **Acessar:** http://localhost:3000
+
+---
