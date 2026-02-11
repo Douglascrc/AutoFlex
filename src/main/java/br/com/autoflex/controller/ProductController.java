@@ -88,4 +88,12 @@ public class ProductController {
         productService.addRawMaterialToProduct(id, request.rawMaterialId(), request.quantity());
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/producible")
+    @Operation(summary = "List products that can be produced", description = "Retrieves a list of products that can be produced with current inventory.")
+    @ApiResponse(responseCode = "200", description = "List of producible products retrieved successfully")
+    public ResponseEntity<List<ProductResponse>> getProducibleProducts() {
+        List<ProductResponse> producibleProducts = productService.findProductsProducibleWithInventory();
+        return ResponseEntity.ok(producibleProducts);
+    }
 }
