@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: autoflex-db
+    environment:
+      POSTGRES_DB: autoflex
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+
+  app:
+    build:
+      context: ..
+      dockerfile: infrastructure/Dockerfile
+    container_name: autoflex-app
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      DATABASE_URL: jdbc:postgresql://postgres:5432/autoflex
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+      ALLOWED_ORIGINS: http://localhost:8080
+      PORT: 8080
+    depends_on:
+      - postgres

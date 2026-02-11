@@ -1,0 +1,40 @@
+services:
+  - type: pserv
+    name: autoflex-db
+    env: docker
+    plan: free
+    region: oregon
+
+
+  - type: web
+    name: autoflex
+    env: docker
+    plan: free
+    region: oregon
+    buildCommand: docker build -t autoflex .
+    startCommand: docker run -p 8080:8080 autoflex
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: autoflex-db
+          property: connectionString
+      - key: DATABASE_USER
+        fromDatabase:
+          name: autoflex-db
+          property: user
+      - key: DATABASE_PASSWORD
+        fromDatabase:
+          name: autoflex-db
+          property: password
+      - key: ALLOWED_ORIGINS
+        sync: false
+      - key: PORT
+        value: 8080
+
+databases:
+  - name: autoflex-db
+    databaseName: autoflex
+    user: autoflex_user
+    plan: free
+    region: oregon
+
