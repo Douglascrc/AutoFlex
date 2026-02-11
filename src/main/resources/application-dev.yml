@@ -1,0 +1,26 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  jpa:
+    show-sql: ${SHOW_SQL:true}
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+    defer-datasource-initialization: true
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/autoflex}
+    username: ${DATABASE_USER:postgres}
+    password: ${DATABASE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+logging:
+  level:
+    root: INFO
+    br.com.autoflex: DEBUG
+    org.springframework.web: DEBUG
