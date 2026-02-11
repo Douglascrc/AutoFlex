@@ -1,0 +1,130 @@
+.raw-material-association {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #eee;
+}
+
+.raw-material-association h3 {
+  font-size: 16px;
+  margin: 0 0 16px 0;
+  color: #333;
+  font-weight: 600;
+}
+
+.association-form {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+
+.association-form .form-group {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.association-form .form-group:last-child {
+  flex: 0 0 auto;
+}
+
+.association-form select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background: white;
+}
+
+.association-form input {
+  width: 100px;
+}
+
+.btn-add {
+  background-color: #28a745;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  height: 36px;
+}
+
+.btn-add:hover {
+  background-color: #218838;
+}
+
+.btn-add:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.associations-list {
+  background: #f8f9fa;
+  border-radius: 4px;
+  padding: 12px;
+}
+
+.association-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.association-item:last-child {
+  border-bottom: none;
+}
+
+.association-info {
+  flex: 1;
+}
+
+.association-info .name {
+  font-weight: 500;
+  color: #333;
+}
+
+.association-info .quantity {
+  font-size: 12px;
+  color: #666;
+  margin-top: 2px;
+}
+
+.btn-remove {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.btn-remove:hover {
+  background-color: #c82333;
+}
+
+.empty-associations {
+  text-align: center;
+  color: #6c757d;
+  font-style: italic;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .association-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .association-form .form-group {
+    margin-bottom: 12px;
+  }
+
+  .association-form input {
+    width: 100%;
+  }
+}
