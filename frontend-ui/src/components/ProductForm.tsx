@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ProductRequest } from '../types/Product';
+import RawMaterialAssociation from './RawMaterialAssociation';
 import './ProductForm.css';
 
 interface ProductFormProps {
@@ -7,6 +8,7 @@ interface ProductFormProps {
   onSubmit: (product: ProductRequest) => void;
   onCancel: () => void;
   isLoading?: boolean;
+  productId?: number;
 }
 
 const ProductForm: React.FC<ProductFormProps> = ({
@@ -14,6 +16,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
   onSubmit,
   onCancel,
   isLoading = false,
+  productId,
 }) => {
   const [formData, setFormData] = useState<ProductRequest>({
     name: '',
@@ -117,6 +120,13 @@ const ProductForm: React.FC<ProductFormProps> = ({
         />
         {errors.price && <span className="error-message">{errors.price}</span>}
       </div>
+
+      <RawMaterialAssociation
+        productId={productId}
+        onAssociationAdded={() => {
+          console.log('Matéria-prima associada ao produto');
+        }}
+      />
 
       <div className="form-actions">
         <button
