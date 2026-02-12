@@ -1,54 +1,206 @@
-# AutoFlex
-Descrição do problema:
+# 🏭 AutoFlex
 
-Uma indústria que produz produtos diversos, necessita controlar o estoque dos insumos (matérias-primas) necessárias para a produção dos itens que fabrica. Para isso será necessário o desenvolvimento de um sistema que permita manter o controle dos produtos e das matérias-primas que são utilizadas para a produção de cada produto.
+Sistema de gerenciamento de estoque para indústria, permitindo controle de produtos, matérias-primas e cálculo automático de produtos que podem ser produzidos com o estoque disponível.
 
-Para o produto devem ser armazenados, além do código, o nome e o valor.
+![Java](https://img.shields.io/badge/Java-17-orange)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.8-green)
+![React](https://img.shields.io/badge/React-19-blue)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)
+![Docker](https://img.shields.io/badge/Docker-Ready-blue)
 
-Para as matérias-primas, além do código, também devem armazenados o nome e quantidade em estoque. Obviamente, deverá ser feito a associação dos produtos e das matérias primas que o compõem, com as respectivas quantidades necessárias de cada matéria prima para produzir o produto.
+## 📋 Sobre o Projeto
 
-Além da manutenção dos cadastros, deseja-se saber quais produtos (e quais quantidades) podem ser produzidos com as matérias-primas em estoque, e o valor total que será obtido com a produção sugerida pelo sistema.
+O AutoFlex é um sistema completo para gestão de estoque industrial que permite:
 
-A priorização de quais produtos devem ser sugeridos pelo sistema, deve ser pelos produtos de maior valor, uma vez que uma determinada matéria-prima pode ser utilizada em mais de um produto.
+- **Cadastro de Produtos** - Gerenciar produtos com nome, descrição e preço
+- **Cadastro de Matérias-Primas** - Controlar insumos com nome, custo e quantidade em estoque
+- **Associação Produto-Matéria** - Definir quais matérias-primas compõem cada produto
+- **Cálculo de Producibilidade** - Identificar automaticamente quais produtos podem ser produzidos com o estoque atual
 
-Requisitos:
+## 🛠️ Tecnologias
 
-- Requisitos não funcionais
+| Camada | Tecnologias |
+|--------|-------------|
+| **Backend** | Java 17, Spring Boot 3.3.8, Spring Data JPA, Lombok |
+| **Frontend** | React 19, TypeScript, Redux Toolkit, Axios |
+| **Banco de Dados** | PostgreSQL 16 |
+| **Documentação** | SpringDoc OpenAPI (Swagger) |
+| **Testes** | JUnit 5, H2, Cypress |
+| **DevOps** | Docker, Docker Compose, Render |
 
-RNF001 – O sistema deverá ser desenvolvido para a plataforma WEB, sendo possível a execução nos principais navegadores (Chrome, Firefox, Edge).
+## 🚀 Como Executar
 
-RNF002 – O sistema deverá ser construído utilizando o conceito de API, ou seja, separar o back-end do front-end.
+### Pré-requisitos
 
-RNF003 – As telas desenvolvidas no front-end devem utilizar os recursos de responsividade.
+- Docker e Docker Compose
+- (Opcional) Java 17+, Node.js 18+, Maven
 
-RNF004 – A persistência de dados deve ser realizada em Sistema Gerenciador de Banco de Dados, com a possibilidade de utilizar Postgres, MySql ou Oracle. Caso tenha instalado o Oracle, a sugestão é utilizá-lo.
+### Opção 1: Docker Compose (Backend + Banco)
 
-RNF005 – O back-end (API) deve ser desenvolvido utilizando algum framework, como Spring, Quarkus ou similar. Caso você conheça Quarkus, a sugestão é que aplique já que é uma das tecnologias utilizadas no Autoflex.
+```bash
+# Clonar o repositório
+git clone https://github.com/seu-usuario/autoflex.git
+cd autoflex
 
-RNF006 – O front-end pode ser desenvolvido utilizando qualquer linguagem ou framework que possibilite o atendimento dos requisitos. Caso você conheça React e Redux, a sugestão é que aplique já que são tecnologias utilizadas no Autoflex.
+# Iniciar PostgreSQL + Backend (frontend embutido no JAR)
+docker compose -f infrastructure/compose.yaml up -d
 
-RNF007 – Tanto a codificação do back-end, front-end, tabelas e colunas do banco de dados devem ser desenvolvidas utilizando a língua inglesa.
+# Aguardar ~30 segundos e acessar:
+# http://localhost:8080
+```
 
-- Requisitos funcionais
+> ⚠️ **Nota**: O Docker Compose builda o frontend React e embute os arquivos estáticos dentro do JAR do Spring Boot. Por isso, tudo é acessado pela porta **8080**.
 
-RF001 – Desenvolver no back-end as funcionalidades CRUD para manter o cadastro de produtos.
+### Opção 2: Desenvolvimento Local (Frontend Separado)
 
-RF002 – Desenvolver no back-end as funcionalidades CRUD para manter o cadastro de matérias primas.
+Para desenvolver com hot-reload no frontend:
 
-RF003 – Desenvolver no back-end as funcionalidades CRUD para associar matérias-primas aos produtos.
+```bash
+# Terminal 1 - Banco de dados
+docker compose -f infrastructure/compose.yaml up postgres -d
 
-RF004 – Desenvolver no back-end as funcionalidades para a consulta dos produtos que podem ser produzidos com as matérias-primas disponíveis em estoque.
+# Terminal 2 - Backend (porta 8080)
+./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
 
-RF005 – Desenvolver no front-end uma interface gráfica que possibilite realizar as operações CRUD para manter o cadastro de produtos.
+# Terminal 3 - Frontend (porta 3000)
+cd frontend-ui
+npm install
+npm start
+```
 
-RF006 – Desenvolver no front-end uma interface gráfica que possibilite realizar as operações CRUD para manter o cadastro de matérias primas.
+Neste modo:
+- **Frontend**: http://localhost:3000 (com hot-reload)
+- **Backend API**: http://localhost:8080
+- **Swagger UI**: http://localhost:8080/swagger-ui.html
 
-RF007 – Desenvolver no front-end uma interface gráfica que possibilite realizar as operações CRUD para associar matérias-primas aos produtos. Não há a necessidade de ser uma tela separada, podendo ser inserida a interface no cadastro de produtos.
+## 📁 Estrutura do Projeto
 
-RF008 – Desenvolver no front-end uma interface gráfica que possibilite listar quais produtos (e quais quantidades) podem ser produzidos com as matérias-primas disponíveis em estoque.
+```
+autoflex/
+├── src/                          # Backend (Spring Boot)
+│   ├── main/
+│   │   ├── java/br/com/autoflex/
+│   │   │   ├── controller/       # REST Controllers
+│   │   │   ├── domain/
+│   │   │   │   ├── entity/       # Entidades JPA
+│   │   │   │   ├── repository/   # Repositórios
+│   │   │   │   └── service/      # Lógica de negócio
+│   │   │   ├── dto/              # Data Transfer Objects
+│   │   │   └── error/            # Tratamento de erros
+│   │   └── resources/
+│   │       ├── application.properties
+│   │       ├── application-dev.yml
+│   │       └── application-prod.yml
+│   └── test/                     # Testes unitários
+│
+├── frontend-ui/                  # Frontend (React)
+│   ├── src/
+│   │   ├── components/           # Componentes React
+│   │   ├── services/             # Chamadas API
+│   │   ├── store/                # Redux store
+│   │   └── types/                # TypeScript types
+│   └── cypress/                  # Testes E2E
+│
+├── infrastructure/               # Configurações de deploy
+│   ├── compose.yaml              # Docker Compose (local)
+│   ├── Dockerfile                # Build local
+│   └── render.yaml               # Configuração Render
+│
+├── Dockerfile                    # Build produção (Render)
+├── pom.xml                       # Dependências Maven
+└── README.md
+```
 
-Desejável:
+## 📡 API Endpoints
 
-- Desenvolvimento de testes unitários para o back-end e para o front-end
+### Produtos
+```
+GET    /products              # Listar todos
+GET    /products/{id}         # Buscar por ID
+POST   /products              # Criar
+PUT    /products/{id}         # Atualizar
+DELETE /products/{id}         # Deletar
+GET    /products/producible   # Produtos que podem ser produzidos
+POST   /products/{id}/raw-materials  # Associar matéria-prima
+```
 
-- Desenvolvimento de testes de integração. Caso tenha conhecimento da tecnologia Cypress, a sugestão é utilizá-la já que utilizamos no Autoflex.
+### Matérias-Primas
+```
+GET    /raw-materials         # Listar todas
+GET    /raw-materials/{id}    # Buscar por ID
+POST   /raw-materials         # Criar
+PUT    /raw-materials/{id}    # Atualizar
+DELETE /raw-materials/{id}    # Deletar
+```
+
+## 🧪 Testes
+
+```bash
+# Testes unitários (Backend)
+./mvnw test
+
+# Testes E2E (Cypress)
+cd frontend-ui
+npm run cypress:open    # Interface gráfica
+npm run cypress:run     # Linha de comando
+```
+
+## 🌐 Deploy
+
+A aplicação está disponível em: **[https://autoflex.onrender.com](https://autoflex-pj5x.onrender.com)**
+
+| Recurso | URL |
+|---------|-----|
+| **Aplicação** | https://autoflex-pj5x.onrender.com |
+| **API Swagger** | https://autoflex-pj5x.onrender.com/swagger-ui.html |
+
+
+## 🏗️ Arquitetura de Deploy
+
+O projeto utiliza **Docker multi-stage build** para criar uma imagem otimizada que contém tanto o frontend quanto o backend.
+
+### Arquitetura de Deploy
+
+```
+┌─────────────────────────────────────┐
+│         Render Web Service          │
+│  ┌───────────────────────────────┐  │
+│  │     Docker Container          │  │
+│  │  ┌─────────────────────────┐  │  │
+│  │  │  Spring Boot App        │  │  │
+│  │  │  (porta 8080)           │  │  │
+│  │  │                         │  │  │
+│  │  │  Serve:                 │  │  │
+│  │  │  - API REST (/api/*)    │  │  │
+│  │  │  - Frontend (/, /*)     │  │  │
+│  │  │    (arquivos estáticos) │  │  │
+│  │  └─────────────────────────┘  │  │
+│  └───────────────────────────────┘  │
+└─────────────────┬───────────────────┘
+                  │
+                  │ JDBC
+                  │
+┌─────────────────▼───────────────────┐
+│   Render PostgreSQL Database        │
+│   (Internal Network)                │
+└─────────────────────────────────────┘
+```
+
+
+## 🔧 Configuração
+
+### Backend (application-dev.yml)
+
+```yaml
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/autoflex}
+    username: ${DATABASE_USER:postgres}
+    password: ${DATABASE_PASSWORD:postgres}
+  jpa:
+    hibernate:
+      ddl-auto: update
+```
+
+
+**Desenvolvido por Douglas Campos** 🚀
