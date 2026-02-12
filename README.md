@@ -33,7 +33,7 @@ O AutoFlex é um sistema completo para gestão de estoque industrial que permite
 ### Pré-requisitos
 
 - Docker e Docker Compose
-- (Opcional) Java 17+, Node.js 18+, Maven
+Java 17+, Node.js 18+, Maven
 
 ### Opção 1: Docker Compose (Backend + Banco)
 
@@ -42,34 +42,33 @@ O AutoFlex é um sistema completo para gestão de estoque industrial que permite
 git clone https://github.com/seu-usuario/autoflex.git
 cd autoflex
 
-# Iniciar PostgreSQL + Backend (frontend embutido no JAR)
+# Iniciar PostgreSQL + Backend 
 docker compose -f infrastructure/compose.yaml up -d
 
-# Aguardar ~30 segundos e acessar:
-# http://localhost:8080
+# A aplicação rodará em http://localhost:8080
+
+# Iniciar o frontend
+cd frontend-ui
+npm install
+npm start
 ```
 
-> ⚠️ **Nota**: O Docker Compose builda o frontend React e embute os arquivos estáticos dentro do JAR do Spring Boot. Por isso, tudo é acessado pela porta **8080**.
-
-### Opção 2: Desenvolvimento Local (Frontend Separado)
-
-Para desenvolver com hot-reload no frontend:
+### Opção 2: Desenvolvimento Local (Sem Docker)
 
 ```bash
-# Terminal 1 - Banco de dados
-docker compose -f infrastructure/compose.yaml up postgres -d
+# 1. Client do Postgres - Banco de dados  
 
-# Terminal 2 - Backend (porta 8080)
+# 2. Terminal - Backend (porta 8080)
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
 
-# Terminal 3 - Frontend (porta 3000)
+# 3. Terminal - Frontend (porta 3000)
 cd frontend-ui
 npm install
 npm start
 ```
 
 Neste modo:
-- **Frontend**: http://localhost:3000 (com hot-reload)
+- **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:8080
 - **Swagger UI**: http://localhost:8080/swagger-ui.html
 
@@ -204,3 +203,6 @@ spring:
 
 
 **Desenvolvido por Douglas Campos** 🚀
+
+
+
