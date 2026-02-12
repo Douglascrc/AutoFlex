@@ -21,7 +21,7 @@ services:
       DATABASE_URL: jdbc:postgresql://postgres:5432/autoflex
       DATABASE_USER: postgres
       DATABASE_PASSWORD: postgres
-      ALLOWED_ORIGINS: http://localhost:8080
+      ALLOWED_ORIGINS: http://localhost:3000
       PORT: 8080
     depends_on:
       - postgres
