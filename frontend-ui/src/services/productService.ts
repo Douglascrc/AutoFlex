@@ -2,7 +2,10 @@ import axios from 'axios';
 import { Product, ProductRequest } from '../types/Product';
 import { ProductRawMaterial } from '../types/RawMaterial';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+// In production, use relative path since frontend is served by the same backend
+// In development, use environment variable or default to localhost:8080
+const API_BASE_URL = process.env.REACT_APP_API_URL ||
+  (process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8080');
 
 const api = axios.create({
   baseURL: API_BASE_URL,
