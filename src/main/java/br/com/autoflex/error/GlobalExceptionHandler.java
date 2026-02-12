@@ -1,4 +1,4 @@
-package br.com.autoflex.errors;
+package br.com.autoflex.error;
 
 import br.com.autoflex.dto.validation.ValidationError;
 import jakarta.persistence.EntityNotFoundException;

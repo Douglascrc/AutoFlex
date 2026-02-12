@@ -1,4 +1,4 @@
-package br.com.autoflex.errors;
+package br.com.autoflex.error;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
